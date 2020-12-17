@@ -5,15 +5,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.p7day03work.adapter.Myadafel;
 import com.example.p7day03work.base.BaseActivity;
 import com.example.p7day03work.bean.Bean;
+import com.example.p7day03work.contract.MainContract;
 import com.example.p7day03work.presenter.PresenterImp;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends BaseActivity<PresenterImp>{
+public class MainActivity extends BaseActivity<PresenterImp> implements MainContract.IViews {
 
     private RecyclerView rec;
     private ArrayList<Bean.DataDTO> list;
@@ -32,7 +35,7 @@ public class MainActivity extends BaseActivity<PresenterImp>{
 
     @Override
     protected void initData() {
-
+        presenter.pre();
     }
 
     @Override
@@ -42,6 +45,18 @@ public class MainActivity extends BaseActivity<PresenterImp>{
 
     @Override
     protected PresenterImp getPresenter() {
-        return new PresenterImp();
+        return new PresenterImp(this);
+    }
+
+    @Override
+    public void getData(Bean bean) {
+        List<Bean.DataDTO> data = bean.getData();
+        list.addAll(data);
+        myadafel.notifyDataSetChanged();
+    }
+
+    @Override
+    public void no(String error) {
+        Log.e("tag",error);
     }
 }

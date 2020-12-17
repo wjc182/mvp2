@@ -14,5 +14,7 @@ public class MainContract {
     }
     public interface IViews{
         void getData(Bean bean);
+
+        void no(String error);
     }
 }
