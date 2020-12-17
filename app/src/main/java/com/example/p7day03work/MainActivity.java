@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity<PresenterImp> implements MainCont
 
     @Override
     protected PresenterImp getPresenter() {
-        return new PresenterImp(this);
+        return new PresenterImp();
     }
 
     @Override
